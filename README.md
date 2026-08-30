@@ -12,13 +12,13 @@ That's intentional at this stage (no database yet — that's next week).
 ## How to install & run
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate      # on Windows: venv\Scripts\activate
+python -m venv venv
+source venv/Scripts/activate      # Windows Git Bash
 pip install -r requirements.txt
 uvicorn main:app --reload --port 8000
 ```
 
-Then open **http://localhost:8000** in your browser, or **http://localhost:8000/docs**
+Then open **http://127.0.0.1:8000** in your browser, or **http://127.0.0.1:8000/docs**
 for the interactive Swagger UI (built in automatically by FastAPI).
 
 ## Endpoints
@@ -36,18 +36,15 @@ for the interactive Swagger UI (built in automatically by FastAPI).
 | POST   | `/reset`          | Reset to the 3 example tasks (extra)  | 200     | — |
 
 ## Example curl output
-
-```
-$ curl -i -X POST http://localhost:8000/tasks -H "Content-Type: application/json" -d '{"title":"Buy milk"}'
+$ curl -i -X POST http://127.0.0.1:8000/tasks -H "Content-Type: application/json" -d '{"title":"Buy milk"}'
 HTTP/1.1 201 Created
 content-type: application/json
 
 {"id":4,"title":"Buy milk","done":false}
-```
 
 ## Swagger UI
 
-Screenshot of `/docs` with the full CRUD cycle tested via "Try it out": *(add your screenshot here)*
+See `swagger-screenshot.png` in this repo — shows the full CRUD cycle tested via "Try it out" at `/docs`.
 
 ## The mortality experiment
 
@@ -55,8 +52,3 @@ Restarting the server resets all tasks back to the original 3 examples — anyth
 updated, or deleted during the session is lost. This happens because the data lives only in
 a Python list in memory, not on disk or in a database. This is the exact problem Week 3
 (databases) solves.
-
-## AI vs me (Stage 7 — bonus)
-
-*(Fill this in after you complete Stage 7: your prompt, what the AI got right/wrong, and
-what your prompt forgot to specify.)*
